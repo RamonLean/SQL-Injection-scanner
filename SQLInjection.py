@@ -89,10 +89,10 @@ def scan_sql_injection(url):
                     # Todos os outros por excessão de submit
                     data[input_tag["name"]] = f"test{c}"
             # URL de solicitação de formulário
-            url = urljoin(url, form_details["action"])
+            url = urljoin(url, form_detalhes["action"])
             if form_detalhes["method"] == "post":
                 res = s.post(url, data=data)
-            elif form_details["method"] == "get":
+            elif form_detalhes["method"] == "get":
                 res = s.get(url, params=data)
             # Testa se o retorno de página é vulnerável
             if Vulneravel(res):
@@ -103,12 +103,14 @@ def scan_sql_injection(url):
 
 if __name__ == "__main__":
     import sys
-    #print (sys.argv[0])
-    try:
-        url = sys.argv[1]
-        #print (sys.argv[1])
-        scan_sql_injection(url)
-    except:
-        print("\nURL não inserida corretamente ou host não existe, \
-exemplo de url válida: ""http://exemplo.com"", não se esqueça de utilizar http://")
+    print("\nExemplo de uso para forms : \n \"python3 SQLinjection.py http//:exemplo.com/\", não se esqueça da ""/"" no final.\n\n\
+Exemplo de uso 2: \n \"python3 SQLinjection.py http//:exemplo.com/id.php=1\" , não se esqueça de utilizar http://\n")
     
+    try:
+    	url = sys.argv[1]
+    	scan_sql_injection(url)
+    except:
+    	print ("\n\t *****************URL não inserida ou inserida incorretamente********************\n\n\n")
+    	
+    
+        
